@@ -15,6 +15,7 @@ class CreateLogBooksTable extends Migration
     {
         Schema::create('log_books', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignUuid('user_id')->references('id')->on('users');
             $table->text('agency')->nullable();
             $table->float('amount');
             $table->float('share');

@@ -53,14 +53,15 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-navbar-theme">
         <div class="container-fluid">
-            <a class="navbar-brand" href="javascript:void(0)">Navbar</a>
+            <a class="navbar-brand" href="javascript:void(0)">Binuatan Creations</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbar-ex-5">
                 <div class="navbar-nav me-auto">
-                    <a class="nav-item nav-link active" href="javascript:void(0)">Home</a>
+                    <a class="nav-item nav-link active" href="/">Home</a>
+                    <a class="nav-item nav-link active" href="/">Tourguide & Driver</a>
                 </div>
                 <ul class="navbar-nav ms-lg-auto">
                     <li class="nav-item">
@@ -177,6 +178,9 @@
         $(".name").select2({
             tags: true,
         })
+        $(".agency").select2({
+            tags: true
+        });
     </script>
 </body>
 

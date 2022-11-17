@@ -18,36 +18,40 @@
                 </div>
             </div>
         @endif
-        <div class="col-lg-12 mb-4 order-0">
-            <div class="card">
-                <div class="d-flex align-items-end row">
-                    <div class="col-sm-7">
-                        <div class="card-body">
-                            <h5>Last Log Book</h5>
-                            <h5 class="card-title text-primary">Amount: {{ number_format($lastLog->amount, 2) }} 🎉 %6 is
-                                {{ number_format($lastLog->share, 2) }}</h5>
-                            <p class="mb-4">
-                                @forelse ($lastLog->touguideDrivers as $item)
-                                    {{ $item->touguideDriver->name }},
-                                @empty
-                                @endforelse
-                                <span class="fw-bold">Agency: {{ $lastLog->agency }} | Date: {{ $lastLog->date }}</span>
-                            </p>
+        @if ($lastLog)
+            <div class="col-lg-12 mb-4 order-0">
+                <div class="card">
+                    <div class="d-flex align-items-end row">
+                        <div class="col-sm-7">
+                            <div class="card-body">
+                                <h5>Last Log Book</h5>
+                                <h5 class="card-title text-primary">Amount: {{ number_format($lastLog->amount, 2) }} 🎉 %6
+                                    is
+                                    {{ number_format($lastLog->share, 2) }}</h5>
+                                <p class="mb-4">
+                                    @forelse ($lastLog->touguideDrivers as $item)
+                                        {{ $item->touguideDriver->name }},
+                                    @empty
+                                    @endforelse
+                                    <span class="fw-bold">Agency: {{ $lastLog->agency }} | Date: {{ $lastLog->date }}</span>
+                                </p>
 
-                            <a href="javascript:;" class="btn btn-sm btn-outline-primary">View</a>
+                                <a href="javascript:;" class="btn btn-sm btn-outline-primary">View</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-5 text-center text-sm-left">
-                        <div class="card-body pb-0 px-0 px-md-4">
-                            <img src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template-free/assets/img/illustrations/man-with-laptop-light.png"
-                                height="140" alt="View Badge User"
-                                data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                                data-app-light-img="illustrations/man-with-laptop-light.png" />
+                        <div class="col-sm-5 text-center text-sm-left">
+                            <div class="card-body pb-0 px-0 px-md-4">
+                                <img src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template-free/assets/img/illustrations/man-with-laptop-light.png"
+                                    height="140" alt="View Badge User"
+                                    data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                                    data-app-light-img="illustrations/man-with-laptop-light.png" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
+
         <!-- Basic Layout -->
         <div class="row">
             <div class="col-xl">
@@ -79,11 +83,14 @@
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label class="form-label">Agency</label>
-                                        <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                            <input name="agency" type="text" class="form-control" placeholder="Agency"
-                                                value="{{ old('agency') }}" />
-                                        </div>
+                                        <select name="agency" class="form-select agency">
+                                            @forelse ($agencies as $item)
+                                                <option value="{{ $item->agency }}">
+                                                    {{ $item->agency }}
+                                                </option>
+                                            @empty
+                                            @endforelse
+                                        </select>
                                         @if ($errors->has('agency'))
                                             <span class="error">{{ $errors->first('agency') }}</span>
                                         @endif

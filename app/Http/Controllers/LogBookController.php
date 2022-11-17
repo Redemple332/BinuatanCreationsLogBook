@@ -7,6 +7,7 @@ use App\Models\LogBook;
 use App\Models\LogBookTourguideDriver;
 use App\Models\TourguideDriver;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -17,7 +18,8 @@ class LogBookController extends Controller
     {
         $lastLog = LogBook::with('touguideDrivers.touguideDriver')->latest()->first();
         $tourguide_drivers = TourguideDriver::with('logBooks')->select('id', 'name')->orderBy('name')->get();
-        return view('log-book.index', compact('tourguide_drivers', 'lastLog'));
+        $agencies = LogBook::groupBy('agency')->get();
+        return view('log-book.index', compact('tourguide_drivers', 'lastLog', 'agencies'));
     }
 
     public function store(Request $request)
@@ -42,7 +44,8 @@ class LogBookController extends Controller
         'amount' => $request->amount,
         'share' => $share,
         'individual_share' => $individual_share,
-        'date' => $request->date
+        'date' => $request->date,
+        'user_id' => Auth::user()->id
        ]);
 
        Guest::create([

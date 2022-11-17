@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/', [App\Http\Controllers\LogBookController::class, 'index'])->name('index');
-Route::post('/log-book', [App\Http\Controllers\LogBookController::class, 'store'])->name('log-book.store');
+Route::get('/', [App\Http\Controllers\LogBookController::class, 'index'])->name('index')->middleware('auth');
+// Route::get('/', [App\Http\Controllers\::class, 'index'])->name('index')->middleware('auth');
+Route::post('/log-book', [App\Http\Controllers\LogBookController::class, 'store'])->name('log-book.store')->middleware('auth');
+
 

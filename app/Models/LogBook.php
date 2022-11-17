@@ -16,7 +16,8 @@ class LogBook extends Model
         'amount',
         'share',
         'individual_share',
-        'date'
+        'date',
+        'user_id',
     ];
 
     public function touguideDrivers()
