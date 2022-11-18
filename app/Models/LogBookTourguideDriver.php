@@ -14,8 +14,14 @@ class LogBookTourguideDriver extends Model
         'log_book_id'
     ];
 
-    public function touguideDriver()
+    public function profile()
     {
         return $this->belongsTo(TourguideDriver::class, 'tourguide_driver_id');
     }
+
+    public function logBook()
+    {
+        return $this->belongsTo(LogBook::class);
+    }
+
 }

@@ -30,7 +30,7 @@
                                     {{ number_format($lastLog->share, 2) }}</h5>
                                 <p class="mb-4">
                                     @forelse ($lastLog->touguideDrivers as $item)
-                                        {{ $item->touguideDriver->name }},
+                                        {{ $item->profile->name }},
                                     @empty
                                     @endforelse
                                     <span class="fw-bold">Agency: {{ $lastLog->agency }} | Date: {{ $lastLog->date }}</span>

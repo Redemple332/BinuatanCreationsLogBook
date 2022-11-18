@@ -16,9 +16,9 @@ class LogBookController extends Controller
 {
     public function index()
     {
-        $lastLog = LogBook::with('touguideDrivers.touguideDriver')->latest()->first();
+        $lastLog = LogBook::with('touguideDrivers.profile')->latest()->first();
         $tourguide_drivers = TourguideDriver::with('logBooks')->select('id', 'name')->orderBy('name')->get();
-        $agencies = LogBook::groupBy('agency')->get();
+        $agencies = LogBook::Agency()->get();
         return view('log-book.index', compact('tourguide_drivers', 'lastLog', 'agencies'));
     }
 
@@ -62,7 +62,12 @@ class LogBookController extends Controller
                $tourDriver = TourguideDriver::create([
                     'name' => Str::after($item, ';'),
                     'agency' => $request->agency,
-                    'occupation' =>  $index == 0 ? 'Driver' : 'Tourguide'
+                    'occupation' =>  $index == 0 ? 'Driver' : 'Tourguide',
+                    'amount' =>  $individual_share
+                ]);
+            }else{
+                TourguideDriver::where('id', $tourDriver->id)->update([
+                    'amount' => $tourDriver->amount + $individual_share
                 ]);
             }
 
@@ -70,7 +75,6 @@ class LogBookController extends Controller
                 'tourguide_driver_id' => $tourDriver->id,
                 'log_book_id' => $log_book->id
             ]);
-
        }
 
        Session::flash('message', 'Saved Successfully!');

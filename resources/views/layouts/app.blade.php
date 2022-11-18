@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>Admin - Virtual Tour</title>
+    <title>Binuatan Creations Log Book System</title>
 
     <meta name="description" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -47,6 +47,8 @@
 
     <!-- Select2 CSS-->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" />
+
     @yield('css_styles')
 </head>
 
@@ -61,7 +63,9 @@
             <div class="collapse navbar-collapse" id="navbar-ex-5">
                 <div class="navbar-nav me-auto">
                     <a class="nav-item nav-link active" href="/">Home</a>
-                    <a class="nav-item nav-link active" href="/">Tourguide & Driver</a>
+                    <a class="nav-item nav-link active" href="{{ route('tourguide-driver.index') }}">Tourguide &
+                        Driver</a>
+                    <a class="nav-item nav-link active" href="{{ route('agency.index') }}">Agency</a>
                 </div>
                 <ul class="navbar-nav ms-lg-auto">
                     <li class="nav-item">

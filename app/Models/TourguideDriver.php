@@ -10,7 +10,7 @@ class TourguideDriver extends Model
     use HasFactory, Uuids;
 
     protected $fillable = [
-        'name', 'occupation', 'agency'
+        'name', 'occupation', 'agency', 'amount'
     ];
 
     public function logBooks()
