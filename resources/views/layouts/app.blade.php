@@ -185,6 +185,10 @@
         $(".agency").select2({
             tags: true
         });
+
+        setTimeout(function() {
+            $('#notif ').hide();
+        }, 5000);
     </script>
 </body>
 

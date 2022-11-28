@@ -42,7 +42,7 @@
         margin-left: 2px;
         float: left;
         width: 50%;
-        */
+
         /* Should be removed. Only for demonstration */
     }
 
@@ -110,7 +110,6 @@
                     </tr>
                 </tbody>
             </table>
-            <hr class="hr-dash">
         </div>
         <div class="column">
             <table>
@@ -151,21 +150,21 @@
                                 @endforeach
                             </td>
                             <td>{{ $item->logBook->agency }}</td>
-                            <td class="text-right">{{ $item->logBook->amount }}</td>
-                            <td class="text-right">{{ $item->logBook->share }}</td>
-                            <td class="text-right">{{ $item->logBook->individual_share }}</td>
-                            <td class="text-right">{{ $item->logBook->individual_share }}</td>
+                            <td class="text-right">{{ number_format($item->logBook->amount, 2) }}</td>
+                            <td class="text-right">{{ number_format($item->logBook->share, 2) }}</td>
+                            <td class="text-right">{{ number_format($item->logBook->individual_share, 2) }}</td>
+                            <td class="text-right">{{ number_format($item->logBook->individual_share, 2) }}</td>
                         </tr>
                     @empty
                     @endforelse
                     <tr>
                         <td colspan="5">Merry Christmas {{ $record->name }}!</td>
                         <td class="text-right"><b>Total</b></td>
-                        <td class="text-right"><b>{{ $totalAmount }}</b></td>
+                        <td class="text-right"><b>{{ number_format($totalAmount, 2) }}</b></td>
+
                     </tr>
                 </tbody>
             </table>
-            <hr class="hr-dash">
         </div>
     </div>
 

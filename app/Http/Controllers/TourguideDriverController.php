@@ -2,15 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SummaryExport;
 use App\Models\TourguideDriver;
 use Illuminate\Http\Request;
 use PDF;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TourguideDriverController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $TGDrivers = TourguideDriver::with('logBooks.logBook')->orderBy('name')->get();
+        $search = $request->search;
+        if($search){
+            $TGDrivers = TourguideDriver::where(function($query) use ($search) {
+                $query->where('name', 'LIKE', "%$search%")
+                    ->orWhere('agency', 'LIKE', "%$search%")
+                    ->orWhere('occupation', 'LIKE', "%$search%");
+                })->with('logBooks.logBook')->orderBy('name')->get();
+
+        }else{
+            $TGDrivers = TourguideDriver::with('logBooks.logBook')->orderBy('name')->get();
+        }
+
+
         return view('tourguide-driver.index', compact('TGDrivers'));
     }
 
@@ -50,5 +64,11 @@ class TourguideDriverController extends Controller
         ]);
 
         return redirect('/tourguide-driver');
+    }
+
+
+    public function exportSummary()
+    {
+        return Excel::download(new SummaryExport, 'summary.xlsx');
     }
 }

@@ -13,8 +13,9 @@
                     </h5>
                 </div>
                 <div class="col-md-3" style="margin-top:.4rem;">
-                    <button class="btn btn-primary btn-sm mt-4" id="btn-search-ba"><i class="fas fa-plus-square"></i>
-                        Select All</button>
+                    <a href="{{ route('tourguide-driver.exportSummary') }}" class="btn btn-primary btn-sm mt-4"
+                        id="btn-search-ba"><i class="fas fa-plus-square"></i>
+                        Print Summary</a>
                     <a class="btn btn-success btn-sm mt-4" href="" id="btn-excel-ba"><i class="fa fa-file-excel"></i>
                         Exel</a>
                     <a class="btn btn-danger btn-sm mt-4" href="{{ route('tourguide-driver.pdf') }}" id="btn-pdf-ba"
@@ -22,6 +23,17 @@
                 </div>
             </div>
 
+            <div class="row m-2">
+                <form action="{{ route('tourguide-driver.index') }}" method="Get">
+                    <div class="col-md-3">
+                        <input type="input" class="form-control" name="search" value="{{ @Request('search') }}"
+                            placeholder="Search">
+                    </div>
+                    <div class="col-md-3 mt-2">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
 
             <div class="table-responsive text-nowrap">
                 <table class="table table-striped">

@@ -36,5 +36,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}/show', [TourguideDriverController::class, 'show'])->name('show');
         Route::put('/{id}', [TourguideDriverController::class, 'update'])->name('update');
         Route::get('/pdf', [TourguideDriverController::class, 'pdf'])->name('pdf');
+        Route::get('/export/summary', [TourguideDriverController::class, 'exportSummary'])->name('exportSummary');
+
     });
 });

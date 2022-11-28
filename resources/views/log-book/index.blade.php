@@ -5,8 +5,8 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Attendance/</span> Log Book</h4>
         @if (Session::has('message'))
-            <div class="bs-toast toast toast-placement-ex m-2 fade bg-success bottom-0 end-0 show" role="alert"
-                aria-live="assertive" aria-atomic="true">
+            <div id="notif" class="bs-toast toast toast-placement-ex m-2 fade bg-success bottom-0 end-0 show"
+                role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
                     <i class='bx bx-bell me-2'></i>
                     <div class="me-auto fw-semibold">{{ Session::get('message') }}</div>
@@ -100,7 +100,7 @@
                                     <div class="mb-3">
                                         <label class="form-label">Amount</label>
                                         <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><i class='bx bx-dollar'></i></span>
+                                            <span class="input-group-text">&#8369;</i></span>
                                             <input name="amount" type="number" class="form-control" placeholder="Amount"
                                                 value="{{ old('amount') }}" />
                                         </div>
