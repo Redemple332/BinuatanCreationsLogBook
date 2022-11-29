@@ -18,7 +18,6 @@ class CreateTourguideDriversTable extends Migration
             $table->string('name')->unique();
             $table->string('occupation')->default('Tourguide');
             $table->string('agency');
-            $table->float('amount');
             $table->timestamps();
         });
     }

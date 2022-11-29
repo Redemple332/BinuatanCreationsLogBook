@@ -35,9 +35,6 @@
                                     @endforelse
                                     <span class="fw-bold">Agency: {{ $lastLog->agency }} | Date: {{ $lastLog->date }}</span>
                                 </p>
-
-                                <a href="{{ route('log-book.edit', ['id' => $lastLog->id]) }}"
-                                    class="btn btn-sm btn-outline-primary">View</a>
                             </div>
                         </div>
                         <div class="col-sm-5 text-center text-sm-left">
@@ -63,14 +60,26 @@
                     </div>
 
                     <div class="card-body">
-                        <form action="{{ route('log-book.store') }}" method="Post">
+                        <form action="{{ route('log-book.update', ['id' => $lastLog->id]) }}" method="POST">
                             @csrf
+                            {{ method_field('PUT') }}
                             <div class="mb-3">
                                 <label class="form-label">Name</label>
                                 <div class="input-group input-group-merge">
                                     <select class="form-select name" name="name[]" multiple="multiple">
+                                        @php
+                                            $selected = null;
+                                        @endphp
                                         @forelse ($tourguide_drivers as $item)
-                                            <option value="{{ $item->id }};{{ $item->name }}">{{ $item->name }}
+                                            @foreach ($lastLog->touguideDrivers as $itemCheck)
+                                                @if ($itemCheck->tourguide_driver_id == $item->id)
+                                                    @php
+                                                        $selected = $item->id;
+                                                    @endphp
+                                                @endif
+                                            @endforeach
+                                            <option {{ $selected == $item->id ? 'selected' : '' }}
+                                                value="{{ $item->id }};{{ $item->name }}">{{ $item->name }}
                                             </option>
                                         @empty
                                         @endforelse
@@ -85,9 +94,9 @@
                                     <div class="mb-3">
                                         <label class="form-label">Agency</label>
                                         <select name="agency" class="form-select agency">
-                                            <option selected value="N/A">N/A</option>
                                             @forelse ($agencies as $item)
-                                                <option value="{{ $item->agency }}">
+                                                <option {{ $lastLog->agency == $item->agency ? 'selected' : '' }}
+                                                    value="{{ $item->agency }}">
                                                     {{ $item->agency }}
                                                 </option>
                                             @empty
@@ -103,8 +112,8 @@
                                         <label class="form-label">Amount</label>
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text">&#8369;</i></span>
-                                            <input name="amount" type="number" class="form-control" placeholder="Amount"
-                                                value="{{ old('amount') }}" />
+                                            <input name="amount" type="text" class="form-control" placeholder="Amount"
+                                                value="{{ old('amount') ?? $lastLog->amount }} " />
                                         </div>
                                         @if ($errors->has('amount'))
                                             <span class="error">{{ $errors->first('amount') }}</span>
@@ -129,7 +138,7 @@
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"><i class='bx bx-user'></i></span>
                                         <input name="children" class="form-control" type="number"
-                                            value="{{ old('children') }}" />
+                                            value="{{ old('children') ?? $lastLog->guest->children }}" />
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -137,7 +146,7 @@
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"><i class='bx bx-user'></i></span>
                                         <input name="female" class="form-control" type="number"
-                                            value="{{ old('female') }}" />
+                                            value="{{ old('female') ?? $lastLog->guest->female }}" />
 
                                     </div>
                                 </div>
@@ -145,8 +154,8 @@
                                     <label class="form-label">Male</label>
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"><i class='bx bx-user'></i></span>
-                                        <input name="male" class="form-control" type="number"
-                                            value="{{ old('male') }}" />
+                                        <input name="male" class="form-control" type="text"
+                                            value="{{ old('male') ?? $lastLog->guest->male }}" />
 
                                     </div>
                                 </div>
@@ -155,11 +164,13 @@
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"><i class='bx bx-flag'></i></span>
                                         <input name="country" class="form-control" type="input"
-                                            value="{{ old('country') }}" />
+                                            value="{{ old('country') ?? $lastLog->guest->country }}" />
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                            <a href="{{ route('log-book.delete', ['id' => $lastLog->id]) }}" type="button"
+                                class="btn btn-danger">Delete</a>
                         </form>
                     </div>
                 </div>

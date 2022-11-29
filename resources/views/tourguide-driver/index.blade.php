@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-9">
                     <h5 class="card-header">Tourguide Driver Table | Total Amount:
-                        <span class="badge bg-label-success">{{ number_format($TGDrivers->sum('amount'), 2) }}</span> | Total
+                        Total
                         TG and Drivers: <span class="badge bg-label-primary">
                             {{ $TGDrivers->count() }}</span>
                     </h5>
@@ -48,6 +48,9 @@
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
+                        @php
+                            $grandTotal = 0;
+                        @endphp
                         @forelse ($TGDrivers as $index => $item)
                             <tr>
                                 <td><input class="form-check-input" name="id[]" type="checkbox" value=""
@@ -59,7 +62,19 @@
                                 <td><span
                                         class="badge {{ $item->occupation == 'Driver' ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $item->occupation }}</span>
                                 </td>
-                                <td class="text-right">{{ number_format($item->amount, 2) }}</td>
+                                @php
+                                    $totalAmount = 0;
+                                @endphp
+                                @forelse ($item->logBooks as $item2)
+                                    @php
+                                        $totalAmount += $item2->logBook->individual_share;
+                                    @endphp
+                                @empty
+                                @endforelse
+                                @php
+                                    $grandTotal += $totalAmount;
+                                @endphp
+                                <td class="text-right">{{ number_format($totalAmount, 2) }}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -82,7 +97,11 @@
                             </tr>
                         @empty
                         @endforelse
-
+                        <tr>
+                            <td colspan="3"></td>
+                            <td><b>Grand Total</b></td>
+                            <td><b>{{ number_format($grandTotal, 2) }}</b></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

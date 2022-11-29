@@ -31,4 +31,9 @@ class LogBook extends Model
         return $this->hasMany(LogBookTourguideDriver::class);
     }
 
+    public function guest()
+    {
+        return $this->hasOne(Guest::class);
+    }
+
 }

@@ -13,7 +13,16 @@
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->occupation }}</td>
                 <td>{{ $item->agency }}</td>
-                <td><b>{{ number_format($item->amount, 2) }}</b></td>
+                @php
+                    $totalAmount = 0;
+                @endphp
+                @forelse ($item->logBooks as $item2)
+                    @php
+                        $totalAmount += $item2->logBook->individual_share;
+                    @endphp
+                @empty
+                @endforelse
+                <td><b>{{ number_format($totalAmount, 2) }}</b></td>
             </tr>
         @endforeach
         <tr>

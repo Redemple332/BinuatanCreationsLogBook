@@ -65,6 +65,8 @@
                     <a class="nav-item nav-link active" href="/">Home</a>
                     <a class="nav-item nav-link active" href="{{ route('tourguide-driver.index') }}">Tourguide &
                         Driver</a>
+                    <a class="nav-item nav-link active" href="{{ route('log-book.list') }}">Log Book</a>
+
                     <a class="nav-item nav-link active" href="{{ route('agency.index') }}">Agency</a>
                 </div>
                 <ul class="navbar-nav ms-lg-auto">
