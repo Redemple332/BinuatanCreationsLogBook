@@ -11,7 +11,8 @@ class LogBookTourguideDriver extends Model
 
     protected $fillable = [
         'tourguide_driver_id',
-        'log_book_id'
+        'log_book_id',
+        'date'
     ];
 
     public function profile()

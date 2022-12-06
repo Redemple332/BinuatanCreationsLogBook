@@ -71,4 +71,10 @@ class TourguideDriverController extends Controller
     {
         return Excel::download(new SummaryExport, 'summary.xlsx');
     }
+
+    public function delete($id)
+    {
+        TourguideDriver::find($id)->delete();
+        return back();
+    }
 }

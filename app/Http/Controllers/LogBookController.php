@@ -67,7 +67,8 @@ class LogBookController extends Controller
 
             LogBookTourguideDriver::create([
                 'tourguide_driver_id' => $tourDriver->id,
-                'log_book_id' => $log_book->id
+                'log_book_id' => $log_book->id,
+                'date' => $request->date,
             ]);
        }
 
@@ -138,12 +139,13 @@ class LogBookController extends Controller
             }
             LogBookTourguideDriver::create([
                 'tourguide_driver_id' => $tourDriver->id,
-                'log_book_id' => $id
+                'log_book_id' => $id,
+                'date' => $request->date,
             ]);
        }
 
        Session::flash('message', 'Saved Updated!');
-       return Redirect('/');
+       return back();
     }
 
     public function delete($id)

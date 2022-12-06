@@ -16,7 +16,8 @@
                     <a href="{{ route('tourguide-driver.exportSummary') }}" class="btn btn-primary btn-sm mt-4"
                         id="btn-search-ba"><i class="fas fa-plus-square"></i>
                         Print Summary</a>
-                    <a class="btn btn-success btn-sm mt-4" href="" id="btn-excel-ba"><i class="fa fa-file-excel"></i>
+                    <a class="btn btn-success btn-sm mt-4" href="{{ route('tourguide-driver.exportSummary') }}"
+                        id="btn-excel-ba"><i class="fa fa-file-excel"></i>
                         Exel</a>
                     <a class="btn btn-danger btn-sm mt-4" href="{{ route('tourguide-driver.pdf') }}" id="btn-pdf-ba"
                         target="_blank"><i class="fa fa-file-pdf"></i> PDF</a>
@@ -88,7 +89,8 @@
                                                 href="{{ route('tourguide-driver.edit', ['id' => $item->id]) }}"><i
                                                     class="bx bx-edit-alt me-1"></i>
                                                 Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
+                                            <a class="dropdown-item"
+                                                href="{{ route('tourguide-driver.delete', ['id' => $item->id]) }}"><i
                                                     class="bx bx-trash me-1"></i>
                                                 Delete</a>
                                         </div>

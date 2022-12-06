@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/{id}', [TourguideDriverController::class, 'update'])->name('update');
         Route::get('/pdf', [TourguideDriverController::class, 'pdf'])->name('pdf');
         Route::get('/export/summary', [TourguideDriverController::class, 'exportSummary'])->name('exportSummary');
+        Route::get('delete/{id}', [TourguideDriverController::class, 'delete'])->name('delete');
 
     });
 });

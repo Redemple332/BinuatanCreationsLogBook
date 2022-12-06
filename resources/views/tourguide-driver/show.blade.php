@@ -33,7 +33,7 @@
                         @php
                             $totalAmount = 0;
                         @endphp
-                        @forelse ($record->logBooks as $item)
+                        @forelse ($record->logBooks->sortBy('created_at') as $item)
                             @php
                                 $totalAmount += $item->logBook->individual_share;
                             @endphp
@@ -49,7 +49,10 @@
                                 <td class="text-right">{{ number_format($item->logBook->amount, 2) }}</td>
                                 <td class="text-right">{{ number_format($item->logBook->share, 2) }}</td>
                                 <td class="text-right">{{ number_format($item->logBook->individual_share, 2) }}</td>
-                                <td class="text-right">{{ number_format($item->logBook->individual_share, 2) }}</td>
+                                <td class="text-right">{{ number_format($item->logBook->individual_share, 2) }}
+                                    <a href="{{ route('log-book.edit', ['id' => $item->logBook->id]) }}"
+                                        class="btn btn-sm btn-outline-primary">Edit</a>
+                                </td>
                             </tr>
                         @empty
                         @endforelse
